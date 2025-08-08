@@ -26,24 +26,25 @@ with col3:
     large_area = st.number_input("Fluid Bed Area - Large Scale (m²)", min_value=0.1, value=1.88, step=0.01)
     target_nozzles = st.number_input("Planned No. of Nozzles - Large Scale", min_value=1, value=5, step=1)
 
-# Area-based calculations
-area_ratio = large_area / small_area
-spray_rate_large = spray_rate * area_ratio
-air_volume_large = air_volume * area_ratio
-spray_rate_per_nozzle = spray_rate_large / target_nozzles
-atom_pressure_large = min(round(atom_pressure + 0.3, 2), 1.5)
+# Button to trigger calculation
+if st.button("Calculate Scale-Up Parameters"):
+    # Area-based calculations
+    area_ratio = large_area / small_area
+    spray_rate_large = spray_rate * area_ratio
+    air_volume_large = air_volume * area_ratio
+    spray_rate_per_nozzle = spray_rate_large / target_nozzles
+    atom_pressure_large = min(round(atom_pressure + 0.3, 2), 1.5)
 
-# Results
-st.markdown("## 📈 Scale-Up Results")
-st.write(f"**Area Ratio (A2/A1):** {area_ratio:.2f}")
+    # Results
+    st.markdown("## 📈 Scale-Up Results")
+    st.write(f"**Area Ratio (A2/A1):** {area_ratio:.2f}")
 
-st.success("### 🌟 Recommended Parameters for Large Scale")
-st.write(f"- **Spray Rate (total):** {spray_rate_large:.0f} g/min")
-st.write(f"- **Spray Rate per Nozzle:** {spray_rate_per_nozzle:.0f} g/min")
-st.write(f"- **Air Volume:** {air_volume_large:.0f} CFM")
-st.write(f"- **Atomization Pressure:** {atom_pressure_large:.2f} bar")
-st.write(f"- **Inlet Air Temp:** {inlet_temp} °C (keep constant)")
-st.write(f"- **Product Temp:** {product_temp} °C (monitor for binder activation)")
-
-
-
+    st.success("### 🌟 Recommended Parameters for Large Scale")
+    st.write(f"- **Spray Rate (total):** {spray_rate_large:.0f} g/min")
+    st.write(f"- **Spray Rate per Nozzle:** {spray_rate_per_nozzle:.0f} g/min")
+    st.write(f"- **Air Volume:** {air_volume_large:.0f} CFM")
+    st.write(f"- **Atomization Pressure:** {atom_pressure_large:.2f} bar")
+    st.write(f"- **Inlet Air Temp:** {inlet_temp} °C (keep constant)")
+    st.write(f"- **Product Temp:** {product_temp} °C (monitor for binder activation)")
+else:
+    st.info("Click the 'Calculate Scale-Up Parameters' button to see results.")
