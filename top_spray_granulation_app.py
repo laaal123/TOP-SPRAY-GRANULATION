@@ -33,7 +33,7 @@ if st.button("Calculate Scale-Up Parameters"):
     spray_rate_large = spray_rate * area_ratio
     air_volume_large = air_volume * area_ratio
     spray_rate_per_nozzle = spray_rate_large / target_nozzles
-    atom_pressure_large = min(round(atom_pressure + 0.3, 2), 1.5)
+    atom_pressure_large = atom_pressure
 
     # Results
     st.markdown("## 📈 Scale-Up Results")
@@ -43,7 +43,7 @@ if st.button("Calculate Scale-Up Parameters"):
     st.write(f"- **Spray Rate (total):** {spray_rate_large:.0f} g/min")
     st.write(f"- **Spray Rate per Nozzle:** {spray_rate_per_nozzle:.0f} g/min")
     st.write(f"- **Air Volume:** {air_volume_large:.0f} CFM")
-    st.write(f"- **Atomization Pressure:** {atom_pressure_large:.2f} bar")
+    st.write(f"- **Atomization Pressure:** {atom_pressure_large:.2f} bar (same as small scale unless droplet tuning required)")
     st.write(f"- **Inlet Air Temp:** {inlet_temp} °C (keep constant)")
     st.write(f"- **Product Temp:** {product_temp} °C (monitor for binder activation)")
 else:
